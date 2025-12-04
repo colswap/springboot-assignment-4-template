@@ -5,7 +5,7 @@ metadata:
   labels:
     app: springboot-app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: springboot-app
@@ -18,7 +18,7 @@ spec:
       containers:
         - name: springboot-app
           image: ghcr.io/colswap/springboot-assignment-4-template:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           env:
             - name: SPRING_DATASOURCE_URL
               value: jdbc:mysql://mydb-mysql:3306/seminar2025?allowPublicKeyRetrieval=true
