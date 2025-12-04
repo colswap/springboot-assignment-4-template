@@ -72,4 +72,7 @@ jobs:
           key: ${{ secrets.EC2_KEY}}
           port: 22
           script: |
+            cd springboot-assigment-4-template
+            git pull
+            sudo k3s kubectl apply -f deployment.yaml
             sudo k3s kubectl rollout restart deployment/springboot-app
