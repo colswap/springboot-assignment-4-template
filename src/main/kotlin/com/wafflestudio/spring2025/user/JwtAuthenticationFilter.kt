@@ -6,10 +6,12 @@ import jakarta.servlet.http.HttpServletResponse
 import org.springframework.stereotype.Component
 import org.springframework.util.AntPathMatcher
 import org.springframework.web.filter.OncePerRequestFilter
+import org.springframework.data.redis.core.StringRedisTemplate
 
 @Component
 class JwtAuthenticationFilter(
     private val jwtTokenProvider: JwtTokenProvider,
+    private val stringRedisTemplate: StringRedisTemplate,
 ) : OncePerRequestFilter() {
     private val pathMatcher = AntPathMatcher()
 
@@ -26,6 +28,10 @@ class JwtAuthenticationFilter(
         val token = resolveToken(request)
 
         if (token != null && jwtTokenProvider.validateToken(token)) {
+            if (stringRedisTemplate.hasKey(token) == true){
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Logged out token")
+                return
+            }
             val username = jwtTokenProvider.getUsername(token)
             request.setAttribute("username", username)
         } else {

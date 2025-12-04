@@ -11,6 +11,7 @@ import com.wafflestudio.spring2025.user.repository.UserRepository
 import org.mindrot.jbcrypt.BCrypt
 import org.springframework.data.redis.core.StringRedisTemplate
 import org.springframework.stereotype.Service
+import java.time.Duration
 
 @Service
 class UserService(
@@ -60,6 +61,11 @@ class UserService(
         user: User,
         token: String,
     ) {
-        TODO()
+        val expiration = jwtTokenProvider.getRemainingExpiration(token)
+
+        if (expiration > 0) {
+            val duration = Duration.ofMillis(expiration)
+            redisTemplate.opsForValue().set(token, "logout", duration)
+        }
     }
 }
