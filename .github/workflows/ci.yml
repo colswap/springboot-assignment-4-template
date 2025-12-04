@@ -37,4 +37,7 @@ jobs:
         run: ./gradlew ktlintCheck
 
       - name: Run Tests
+        env:
+          SPRING_DATA_REDIS_HOST: redis
+          SPRING_DATA_REDIS_PORT: 6379
         run: ./gradlew test
