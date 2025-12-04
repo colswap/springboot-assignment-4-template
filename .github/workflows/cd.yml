@@ -72,4 +72,4 @@ jobs:
           key: ${{ secrets.EC2_KEY}}
           port: 22
           script: |
-            sudo k3s kubectl rollout restart deployment/spring-server
+            sudo k3s kubectl rollout restart deployment/springboot-app
