@@ -5,7 +5,7 @@ metadata:
   labels:
     app: springboot-app
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: springboot-app
@@ -29,6 +29,10 @@ spec:
                 secretKeyRef:
                   name: mydb-mysql
                   key: mysql-root-password
+            - name: SPRING_DATA_REDIS_HOST
+              value: redis-master
+            - name: SPRING_DATA_REDIS_PASSWORD
+              value: redispassword
           ports:
             - containerPort: 8080
 
