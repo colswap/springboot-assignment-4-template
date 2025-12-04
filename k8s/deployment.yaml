@@ -21,7 +21,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://mydb-mysql:3306/seminar2025?allowPublicKeyRetrieval=true
+              value: jdbc:mysql://mydb-mysql:3306/seminar2025?allowPublicKeyRetrieval=true&useSSL=false
             - name: SPRING_DATASOURCE_USERNAME
               value: root
             - name: SPRING_DATASOURCE_PASSWORD
