@@ -22,7 +22,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     env:
-      SPRING_DATA_REDIS_HOST: redis-master
+      SPRING_DATA_REDIS_HOST: redis
       SPRING_DATA_REDIS_PORT: 6379
 
     steps:
